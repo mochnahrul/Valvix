@@ -376,7 +376,7 @@ export function AiPersonaView({ currentProfile, userGames = [] }: AiPersonaViewP
               <span className="text-[10px] uppercase tracking-wider text-text-secondary font-medium block">
                 Primary Gaming Style
               </span>
-              <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-signal-emerald tracking-tight mt-0.5 break-words">
+              <h2 className="text-lg sm:text-xl font-heading font-extrabold text-signal-emerald tracking-tight mt-0.5 sm:whitespace-nowrap">
                 {persona.archetypeTitle}
               </h2>
             </div>
