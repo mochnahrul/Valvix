@@ -380,7 +380,7 @@ export function BacklogPickerView({
                   </span>
                 ) : game.priceInitialIDR === 0 ? (
                   <span className="font-mono text-[10px] text-text-secondary font-semibold">
-                    Free
+                    {game.isFree ? "Free" : "N/A"}
                   </span>
                 ) : (
                   <span className="font-mono text-[10px] text-text-secondary font-semibold">

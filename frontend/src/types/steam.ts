@@ -29,6 +29,7 @@ export interface SteamGame {
   priceInitialIDR: number;
   priceFinalIDR: number;
   discountPercent: number;
+  isFree?: boolean;
   playtimeForever: number; // in minutes
   playtime2Weeks: number;  // in minutes
   genres: string[];

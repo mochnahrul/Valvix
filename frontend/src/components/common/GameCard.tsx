@@ -31,7 +31,14 @@ export function GameCard({
   priceDisplay,
 }: GameCardProps) {
   const { formatPrice } = useCurrency();
-  const displayPrice = priceDisplay !== undefined ? priceDisplay : formatPrice(game.priceInitialIDR);
+  const displayPrice =
+    priceDisplay !== undefined
+      ? priceDisplay
+      : game.priceInitialIDR > 0
+      ? formatPrice(game.priceInitialIDR)
+      : game.isFree
+      ? "Free"
+      : "N/A";
   const releaseYear = getGameReleaseYear(game.appId, game.name);
   const primaryGenre = game.genres && game.genres.length > 0 ? game.genres[0] : null;
 

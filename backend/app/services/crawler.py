@@ -143,8 +143,18 @@ def parse_app_details(app_id: int, raw_name: str, data: Optional[Dict[str, Any]]
         final_price = 0
         discount = 0
     else:
-        initial_price = 0
-        final_price = 0
+        # Fallback for bundle/package-only paid games (e.g. CoD HQ sub-titles)
+        pkg_price = 0
+        for pkg_group in data.get("package_groups") or []:
+            for sub in pkg_group.get("subs") or []:
+                cents = sub.get("price_in_cents_with_discount") or 0
+                if cents > 0:
+                    pkg_price = cents // 100
+                    break
+            if pkg_price > 0:
+                break
+        initial_price = pkg_price
+        final_price = pkg_price
         discount = 0
 
     # Genres

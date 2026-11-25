@@ -249,7 +249,9 @@ export function GameAchievementDrawer({
                       : game.playtimeForever === 0
                       ? "Unplayed (0h)"
                       : game.priceInitialIDR === 0
-                      ? "Free to Play"
+                      ? game.isFree
+                        ? "Free to Play"
+                        : "Store price unavailable"
                       : "Under 1h played"
                   }
                 >
@@ -258,7 +260,9 @@ export function GameAchievementDrawer({
                     : game.playtimeForever === 0
                     ? "0h"
                     : game.priceInitialIDR === 0
-                    ? "Free"
+                    ? game.isFree
+                      ? "Free"
+                      : "N/A"
                     : "< 1h"}
                 </div>
               </div>

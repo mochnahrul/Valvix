@@ -513,6 +513,7 @@ async def sync_user_library(identifier: str, session: AsyncSession) -> SyncRespo
                     price_initial_idr=game_entity.price_initial_idr,
                     price_final_idr=game_entity.price_final_idr,
                     discount_percent=game_entity.discount_percent,
+                    is_free=game_entity.is_free,
                     playtime_forever=playtime_forever,
                     playtime_2weeks=playtime_2weeks,
                     genres=game_entity.genres or ["Game"],

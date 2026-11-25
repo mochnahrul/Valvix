@@ -44,6 +44,7 @@ class SteamGame(CamelModel):
     price_initial_idr: int = Field(default=0, alias="priceInitialIDR")
     price_final_idr: int = Field(default=0, alias="priceFinalIDR")
     discount_percent: int = Field(default=0, alias="discountPercent")
+    is_free: bool = Field(default=False, alias="isFree")
     playtime_forever: int = Field(default=0, alias="playtimeForever")  # in minutes
     playtime_2weeks: int = Field(default=0, alias="playtime2Weeks")    # in minutes
     genres: List[str] = Field(default_factory=list)
