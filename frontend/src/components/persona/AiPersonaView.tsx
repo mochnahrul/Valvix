@@ -350,7 +350,7 @@ export function AiPersonaView({ currentProfile, userGames = [] }: AiPersonaViewP
 
           {/* Card Header: Profile & Archetype Badge */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-1 border-b border-border pb-6">
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3.5 sm:shrink-0">
               <GamerAvatar
                 src={currentProfile.avatarUrl}
                 alt={currentProfile.personaName}
@@ -372,11 +372,11 @@ export function AiPersonaView({ currentProfile, userGames = [] }: AiPersonaViewP
             </div>
 
             {/* Archetype Highlight Badge */}
-            <div className="text-left sm:text-right sm:shrink-0">
+            <div className="text-left sm:text-right sm:flex-1 min-w-0">
               <span className="text-[10px] uppercase tracking-wider text-text-secondary font-medium block">
                 Primary Gaming Style
               </span>
-              <h2 className="text-base sm:text-lg font-heading font-extrabold text-signal-emerald tracking-normal mt-0.5 leading-snug sm:whitespace-nowrap">
+              <h2 className="text-base sm:text-lg font-heading font-extrabold text-signal-emerald tracking-normal mt-0.5 leading-snug">
                 {persona.archetypeTitle}
               </h2>
             </div>
