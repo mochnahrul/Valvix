@@ -13,23 +13,23 @@
 
 ```mermaid
 flowchart LR
-    User["Player Browser\n(React 18 + Vite)"] -->|HTTP / JSON| API["FastAPI Backend\n(app/main.py)"]
-    User -->|OpenID 2.0 Redirect| SteamAuth["Steam Community\nOpenID"]
-    SteamAuth -->|Callback + SteamID64| API
+    User["Player Browser<br/>(React 18 + Vite)"] -->|"HTTP / JSON"| API["FastAPI Backend<br/>(app/main.py)"]
+    User -->|"OpenID 2.0 Redirect"| SteamAuth["Steam Community<br/>OpenID"]
+    SteamAuth -->|"Callback + SteamID64"| API
 
-    subgraph Backend Services
-        API --> SteamSvc["steam_service.py\n(Sync & Overview)"]
-        API --> AchSvc["achievement_service.py\n(Trophy Progress)"]
-        API --> GeminiSvc["gemini_service.py\n(Persona & Guides)"]
-        SteamSvc --> Crawler["crawler.py\n(Storefront Metadata)"]
+    subgraph Backend["Backend Services"]
+        API --> SteamSvc["steam_service.py<br/>(Sync & Overview)"]
+        API --> AchSvc["achievement_service.py<br/>(Trophy Progress)"]
+        API --> GeminiSvc["gemini_service.py<br/>(Persona & Guides)"]
+        SteamSvc --> Crawler["crawler.py<br/>(Storefront Metadata)"]
     end
 
-    SteamSvc -->|GetPlayerSummaries\nGetOwnedGames\nGetFriendList| SteamWebAPI["Steam Web API"]
-    AchSvc -->|GetSchemaForGame\nGetPlayerAchievements\nGetGlobalPercentages| SteamWebAPI
-    Crawler -->|appdetails| SteamStore["Steam Storefront API"]
-    GeminiSvc -->|generate_content\ngemini-2.5-flash| Gemini["Google Gemini API"]
+    SteamSvc -->|"GetPlayerSummaries<br/>GetOwnedGames<br/>GetFriendList"| SteamWebAPI["Steam Web API"]
+    AchSvc -->|"GetSchemaForGame<br/>GetPlayerAchievements<br/>GetGlobalPercentages"| SteamWebAPI
+    Crawler -->|"appdetails"| SteamStore["Steam Storefront API"]
+    GeminiSvc -->|"generate_content<br/>gemini-2.5-flash"| Gemini["Google Gemini API"]
 
-    Backend Services --> DB[("SQLite WAL / PostgreSQL\nvalvix.db")]
+    Backend --> DB[("SQLite WAL / PostgreSQL<br/>valvix.db")]
 ```
 
 ---

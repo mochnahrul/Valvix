@@ -176,30 +176,30 @@ flowchart TD
     end
 
     subgraph External["External APIs"]
-        SteamWeb[Steam Web API\nGetOwnedGames / Summaries]
-        SteamStore[Steam Store API\nappdetails / IDR Currency]
-        Gemini[Google Gemini API\ngemini-2.5-flash / Structured JSON]
+        SteamWeb["Steam Web API<br/>GetOwnedGames / Summaries"]
+        SteamStore["Steam Store API<br/>appdetails / IDR Currency"]
+        Gemini["Google Gemini API<br/>gemini-2.5-flash / Structured JSON"]
     end
 
-    SyncTrigger -->|1. SteamID / Vanity URL| Router
+    SyncTrigger -->|"1. SteamID / Vanity URL"| Router
     Router --> AuthEngine
-    AuthEngine -->|Resolve ID64| SteamWeb
+    AuthEngine -->|"Resolve ID64"| SteamWeb
 
     Router --> SyncEngine
-    SyncEngine -->|Fetch Owned Games| SteamWeb
-    SyncEngine -->|Batch Upsert User Playtime| UserGames
-    SyncEngine -->|Check Missing Catalog Apps| Games
-    SyncEngine -->|Queue Missing Metadata| RateLimiter
-    RateLimiter -->|Bounded Store Crawl max 1.5 req/s| SteamStore
-    SteamStore -->|Store Metadata, IDR Base Price, Tags| Games
+    SyncEngine -->|"Fetch Owned Games"| SteamWeb
+    SyncEngine -->|"Batch Upsert User Playtime"| UserGames
+    SyncEngine -->|"Check Missing Catalog Apps"| Games
+    SyncEngine -->|"Queue Missing Metadata"| RateLimiter
+    RateLimiter -->|"Bounded Store Crawl max 1.5 req/s"| SteamStore
+    SteamStore -->|"Store Metadata, IDR Base Price, Tags"| Games
 
-    SquadUI -->|2. Query Intersected Games [ID1, ID2, ID3]| Router
+    SquadUI -->|"2. Query Intersected Games (ID1, ID2, ID3)"| Router
     Router --> SquadEngine
-    SquadEngine -->|Optimized Aggregation Query| UserGames
-    UserGames -->|Join Metadata| Games
-    SquadEngine -->|Return Common Co-op Titles| SquadUI
+    SquadEngine -->|"Optimized Aggregation Query"| UserGames
+    UserGames -->|"Join Metadata"| Games
+    SquadEngine -->|"Return Common Co-op Titles"| SquadUI
 
-    PersonaUI -->|3. Request Persona (Force Refresh or Cache)| Router
+    PersonaUI -->|"3. Request Persona (Force Refresh or Cache)"| Router
     Router --> AIEngine
     AIEngine -->|Compute Library Telemetry Hash| Personas
     Personas -- Cache Hit --> AIEngine
