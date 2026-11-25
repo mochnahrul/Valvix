@@ -65,9 +65,10 @@ export function BacklogPickerView({
         const hours = g.playtimeForever / 60;
         const achTotal = g.achievementsTotal || 0;
         const achUnlocked = g.achievementsUnlocked || 0;
+        const isCompleted = achTotal > 0 && achUnlocked >= achTotal;
         const achPct = achTotal > 0 ? achUnlocked / achTotal : 0;
-        // Quick wins: Games with < 15 hours played, or games with > 50% achievements unlocked but not 100%
-        return (hours > 0 && hours <= 15) || (achPct >= 0.5 && achPct < 1.0);
+        // Quick wins: Incomplete games with <= 15h played, or >= 50% achievements unlocked
+        return !isCompleted && ((hours > 0 && hours <= 15) || (achPct >= 0.5 && achPct < 1.0));
       }),
     [games]
   );
@@ -76,9 +77,12 @@ export function BacklogPickerView({
     () =>
       games.filter((g) => {
         const hours = g.playtimeForever / 60;
-        const achRemaining = (g.achievementsTotal || 0) - (g.achievementsUnlocked || 0);
-        // Games started (> 1 hour) where achievements remain, or between 2 and 60 hours
-        return (hours >= 2 && hours <= 60) || (hours > 1 && achRemaining > 0);
+        const achTotal = g.achievementsTotal || 0;
+        const achUnlocked = g.achievementsUnlocked || 0;
+        const isCompleted = achTotal > 0 && achUnlocked >= achTotal;
+        const achRemaining = achTotal - achUnlocked;
+        // Incomplete games started (> 1h) with achievements remaining, or 2-60h played
+        return !isCompleted && ((hours >= 2 && hours <= 60) || (hours > 1 && achRemaining > 0));
       }),
     [games]
   );
@@ -370,9 +374,17 @@ export function BacklogPickerView({
                   <span className="font-mono text-[10px] text-signal-emerald font-semibold">
                     {formatPrice(costPerHour)}/h
                   </span>
-                ) : (
+                ) : game.playtimeForever === 0 ? (
                   <span className="font-mono text-[10px] text-signal-orange font-semibold">
                     0h Logged
+                  </span>
+                ) : game.priceInitialIDR === 0 ? (
+                  <span className="font-mono text-[10px] text-text-secondary font-semibold">
+                    Free
+                  </span>
+                ) : (
+                  <span className="font-mono text-[10px] text-text-secondary font-semibold">
+                    &lt; 1h Played
                   </span>
                 )}
               </div>

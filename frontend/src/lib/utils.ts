@@ -96,7 +96,7 @@ export function formatHours(minutes: number | null | undefined): string {
 }
 
 export function calculateCostPerHour(priceIDR: number, playtimeMinutes: number): number | null {
-  if (playtimeMinutes === 0 || priceIDR === 0) return null;
+  if (!playtimeMinutes || playtimeMinutes < 60 || !priceIDR || priceIDR <= 0) return null;
   const hours = playtimeMinutes / 60;
   return Math.round(priceIDR / hours);
 }

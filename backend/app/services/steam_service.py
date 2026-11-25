@@ -250,7 +250,7 @@ def calculate_overview(games: List[SteamGame]) -> LibraryOverview:
     total_hours = round(exact_hours, 1)
     total_value_idr = sum((g.price_initial_idr or g.price_final_idr or 0) for g in games)
 
-    avg_cost_per_hour = int(total_value_idr / exact_hours) if exact_hours > 0 else 0
+    avg_cost_per_hour = int(total_value_idr / max(1.0, exact_hours)) if total_minutes > 0 else 0
 
     unplayed_games = [g for g in games if g.playtime_forever == 0]
     unplayed_count = len(unplayed_games)
@@ -261,8 +261,8 @@ def calculate_overview(games: List[SteamGame]) -> LibraryOverview:
     played_games = [g for g in games if g.playtime_forever > 0]
     most_played = max(played_games, key=lambda g: g.playtime_forever) if played_games else (games[0] if games else None)
 
-    # Top value (highest playtime with price > 0, lowest cost per hour)
-    paid_played = [g for g in played_games if (g.price_initial_idr or g.price_final_idr or 0) > 0]
+    # Top value (at least 1h played with price > 0, lowest cost per hour)
+    paid_played = [g for g in played_games if g.playtime_forever >= 60 and (g.price_initial_idr or g.price_final_idr or 0) > 0]
     if paid_played:
         top_value = min(paid_played, key=lambda g: (g.price_initial_idr or g.price_final_idr) / (g.playtime_forever / 60.0))
     else:

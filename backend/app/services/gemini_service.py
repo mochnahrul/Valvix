@@ -216,7 +216,7 @@ async def get_or_generate_persona(
 
     total_value_idr = sum((g.price_initial_idr or g.price_final_idr or 0) for _, g in rows)
     unplayed_value_idr = sum((g.price_initial_idr or g.price_final_idr or 0) for g in unplayed_games)
-    avg_cost_per_hour = int(total_value_idr / exact_hours) if exact_hours > 0 else 0
+    avg_cost_per_hour = int(total_value_idr / max(1.0, exact_hours)) if total_minutes > 0 else 0
 
     if unplayed_games:
         most_expensive_unplayed = max(unplayed_games, key=lambda g: (g.price_initial_idr or g.price_final_idr or 0))

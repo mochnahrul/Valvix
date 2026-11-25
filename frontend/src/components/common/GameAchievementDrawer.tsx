@@ -228,8 +228,25 @@ export function GameAchievementDrawer({
                   <Coins className="w-3.5 h-3.5 text-signal-emerald shrink-0" />
                   <span className="truncate">Cost / Hr</span>
                 </div>
-                <div className="mt-1 text-xs sm:text-base font-mono font-bold text-signal-emerald truncate" title={costPerHour !== null ? `${formatPrice(costPerHour)}/h` : "Unplayed (0h)"}>
-                  {costPerHour !== null ? `${formatPrice(costPerHour)}/h` : "0h"}
+                <div
+                  className="mt-1 text-xs sm:text-base font-mono font-bold text-signal-emerald truncate"
+                  title={
+                    costPerHour !== null
+                      ? `${formatPrice(costPerHour)}/h`
+                      : game.playtimeForever === 0
+                      ? "Unplayed (0h)"
+                      : game.priceInitialIDR === 0
+                      ? "Free to Play"
+                      : "Under 1h played"
+                  }
+                >
+                  {costPerHour !== null
+                    ? `${formatPrice(costPerHour)}/h`
+                    : game.playtimeForever === 0
+                    ? "0h"
+                    : game.priceInitialIDR === 0
+                    ? "Free"
+                    : "< 1h"}
                 </div>
               </div>
 
