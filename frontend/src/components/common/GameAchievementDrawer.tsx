@@ -87,6 +87,19 @@ export function GameAchievementDrawer({
     };
   }, [game?.appId, activeSteamId]);
 
+  // Lock background page scroll while drawer is open
+  useEffect(() => {
+    if (!game) return;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [Boolean(game)]);
+
   if (!game) return null;
 
   const achievements = achievementsList.length > 0 ? achievementsList : game.achievements || [];
@@ -150,7 +163,7 @@ export function GameAchievementDrawer({
   });
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-hidden">
+    <div className="fixed inset-0 z-[100] overflow-hidden overscroll-none">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-[#0D0F14]/80 backdrop-blur-sm transition-opacity"
@@ -386,7 +399,7 @@ export function GameAchievementDrawer({
           </div>
 
           {/* 4. Scrollable Achievement List */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5">
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 space-y-3.5">
             {isLoadingAchievements ? (
               <LoadingState
                 variant="purple"

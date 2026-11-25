@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { UserProfile, SteamGame } from "@/types/steam";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -52,6 +52,18 @@ export const ShareShowcaseModal: React.FC<ShareShowcaseModalProps> = ({
   const [exportSuccess, setExportSuccess] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [exportError, setExportError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [isOpen]);
 
   // 1. Calculate Comprehensive Statistics
   const stats = useMemo(() => {
@@ -353,7 +365,7 @@ export const ShareShowcaseModal: React.FC<ShareShowcaseModalProps> = ({
           </div>
 
           {/* Modal Scrollable Body: Inset scrollbar strictly contained within modal padding */}
-          <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-3.5 space-y-3.5 custom-modal-scroll">
+          <div className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-3.5 space-y-3.5 custom-modal-scroll">
             {/* =========================================================================
                 THE COLLECTIBLE PASSPORT CARD (Export Target for toPng)
                ========================================================================= */}
