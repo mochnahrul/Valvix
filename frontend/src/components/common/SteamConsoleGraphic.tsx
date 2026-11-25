@@ -2,7 +2,7 @@ import { TrendingUp, Gamepad2, Users2, Trophy, Flame, Layers } from "lucide-reac
 
 export function SteamConsoleGraphic() {
   return (
-    <div className="relative w-full max-w-[540px] select-none pointer-events-none">
+    <div className="relative w-full max-w-xl select-none pointer-events-none">
       {/* Subtle ambient highlight */}
       <div className="absolute -inset-4 bg-signal-emerald/[0.04] blur-2xl rounded-3xl" />
 
