@@ -201,12 +201,12 @@ flowchart TD
 
     PersonaUI -->|"3. Request Persona (Force Refresh or Cache)"| Router
     Router --> AIEngine
-    AIEngine -->|Compute Library Telemetry Hash| Personas
-    Personas -- Cache Hit --> AIEngine
-    AIEngine -- Cache Miss -->|Send Telemetry Summary JSON| Gemini
-    Gemini -->|Return Schema Validated JSON| AIEngine
-    AIEngine -->|Store Persona Record| Personas
-    AIEngine -->|Deliver Archetype & Roast| PersonaUI
+    AIEngine -->|"Compute Library Telemetry Hash"| Personas
+    Personas -->|"Cache Hit"| AIEngine
+    AIEngine -->|"Cache Miss: Send Telemetry Summary JSON"| Gemini
+    Gemini -->|"Return Schema Validated JSON"| AIEngine
+    AIEngine -->|"Store Persona Record"| Personas
+    AIEngine -->|"Deliver Archetype & Roast"| PersonaUI
 ```
 
 ---
