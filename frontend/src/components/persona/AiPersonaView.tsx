@@ -350,22 +350,22 @@ export function AiPersonaView({ currentProfile, userGames = [] }: AiPersonaViewP
 
           {/* Card Header: Profile & Archetype Badge */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-1 border-b border-border pb-6">
-            <div className="flex items-center gap-3.5 min-w-0">
+            <div className="flex items-center gap-3.5 flex-1 min-w-0">
               <GamerAvatar
                 src={currentProfile.avatarUrl}
                 alt={currentProfile.personaName}
                 className="w-14 h-14 rounded-2xl border border-white/15 shadow-md shrink-0"
               />
-              <div className="space-y-0.5 min-w-0">
+              <div className="space-y-0.5 flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-lg font-heading font-extrabold text-text-primary truncate max-w-[200px] sm:max-w-[260px]">
+                  <h3 className="text-lg font-heading font-extrabold text-text-primary break-words">
                     {currentProfile.personaName}
                   </h3>
                   <Badge variant="emerald" className="text-[10px] py-0 px-2 shrink-0">
                     Verified Steam
                   </Badge>
                 </div>
-                <p className="text-xs font-mono text-text-secondary truncate">
+                <p className="text-xs font-mono text-text-secondary break-all">
                   SteamID: {currentProfile.steamId64}
                 </p>
               </div>

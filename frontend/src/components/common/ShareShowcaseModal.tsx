@@ -378,15 +378,15 @@ export const ShareShowcaseModal: React.FC<ShareShowcaseModalProps> = ({
 
               {/* Card Header: Avatar & Player Rank */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-3.5">
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
                   <GamerAvatar
                     src={currentProfile.avatarUrl}
                     alt={currentProfile.personaName}
                     className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border border-white/20 shadow-md shrink-0"
                   />
-                  <div className="space-y-0.5 min-w-0">
+                  <div className="space-y-0.5 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-lg sm:text-xl font-heading font-extrabold text-text-primary tracking-tight truncate max-w-[190px] sm:max-w-[260px]">
+                      <h3 className="text-lg sm:text-xl font-heading font-extrabold text-text-primary tracking-tight break-words">
                         {currentProfile.personaName}
                       </h3>
                       <Badge variant={mode === "completed" ? "purple" : "blue"} className="text-[9px] py-0 px-1.5 gap-1 shrink-0">
@@ -394,7 +394,7 @@ export const ShareShowcaseModal: React.FC<ShareShowcaseModalProps> = ({
                         <span>Steam Verified</span>
                       </Badge>
                     </div>
-                    <p className="text-[11px] font-mono text-text-secondary truncate">
+                    <p className="text-[11px] font-mono text-text-secondary break-all">
                       SteamID: {currentProfile.steamId64}
                     </p>
                   </div>
