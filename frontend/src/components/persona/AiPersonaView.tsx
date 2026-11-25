@@ -372,11 +372,11 @@ export function AiPersonaView({ currentProfile, userGames = [] }: AiPersonaViewP
             </div>
 
             {/* Archetype Highlight Badge */}
-            <div className="text-left sm:text-right min-w-0 w-full sm:w-auto">
+            <div className="text-left sm:text-right min-w-0 sm:max-w-[55%]">
               <span className="text-[10px] uppercase tracking-wider text-text-secondary font-medium block">
                 Primary Gaming Style
               </span>
-              <h2 className="text-lg sm:text-xl font-heading font-extrabold text-signal-emerald tracking-tight mt-0.5 sm:whitespace-nowrap">
+              <h2 className="text-base sm:text-lg font-heading font-extrabold text-signal-emerald tracking-normal mt-0.5 leading-snug">
                 {persona.archetypeTitle}
               </h2>
             </div>

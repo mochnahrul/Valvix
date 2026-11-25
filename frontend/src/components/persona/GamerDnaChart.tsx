@@ -163,7 +163,7 @@ export const GamerDnaChart: React.FC<GamerDnaChartProps> = ({ metrics, className
 
           {/* Axis Labels - Explicit inline styles and presentation attributes for 100% accurate PNG export */}
           {metrics.map((m, i) => {
-            const outer = getCoordinates(i, 118, radius);
+            const outer = getCoordinates(i, 121, radius);
             const isLeft = outer.x < center - 10;
             const isRight = outer.x > center + 10;
             const textAnchor = isRight ? "start" : isLeft ? "end" : "middle";
@@ -174,7 +174,7 @@ export const GamerDnaChart: React.FC<GamerDnaChartProps> = ({ metrics, className
                 {/* Label text */}
                 <text
                   x={outer.x}
-                  y={outer.y}
+                  y={outer.y - 3}
                   textAnchor={textAnchor}
                   dominantBaseline="central"
                   fill={isHovered ? "#ffffff" : "#cbd5e1"}
